@@ -1,5 +1,8 @@
 import { Sequelize } from "sequelize";
 import { AutoOptions, SequelizeAuto } from "sequelize-auto";
+import * as dotenv from "dotenv";
+
+dotenv.config();
 
 const { DB_NAME, DB_USERNAME, DB_PASSWORD, DB_HOST, DB_PORT, DB_DIALECT }: any =
   process.env;

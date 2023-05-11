@@ -19,9 +19,9 @@
 		"dev:start": "fastify start --ignore-watch=.ts$ -w -l info -P dist/app.js",
 		"prepare": "husky install",
 		"model": "npx ts-node auto.ts",
-		"migrate":"npx prisma migrate deploy",
-		"seed":"npx prisma db seed",
-		"migrate:create":"npx prisma migrate dev --create-only"
+		"migrate": "npx prisma migrate deploy",
+		"seed": "npx prisma db seed",
+		"migrate:create": "npx prisma migrate dev --create-only"
 	},
 	"keywords": [
 		"fastify",

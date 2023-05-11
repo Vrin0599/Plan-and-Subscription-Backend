@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,4 +5,38 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model addrerss {
+  id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name         String    @db.VarChar
+  address_line String?   @db.VarChar
+  city         String    @db.VarChar
+  state        String    @db.VarChar
+  country      String    @db.VarChar
+  pincode      Int
+  email        String    @unique @db.VarChar
+  delete       Boolean?  @default(false)
+  is_active    Boolean?  @default(false)
+  created_at   DateTime? @default(now()) @db.Timestamp(6)
+  updated_at   DateTime? @default(now()) @db.Timestamp(6)
+  created_by   String?   @db.Uuid
+  updated_by   String?   @db.Uuid
+  company      company[]
+}
+
+model company {
+  id         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name       String    @db.VarChar
+  website    String?   @db.VarChar
+  logo       String?   @db.VarChar
+  email      String    @unique @db.VarChar
+  address_id String?   @db.Uuid
+  delete     Boolean?  @default(false)
+  is_active  Boolean?  @default(false)
+  created_at DateTime? @default(now()) @db.Timestamp(6)
+  updated_at DateTime? @default(now()) @db.Timestamp(6)
+  created_by String?   @db.Uuid
+  updated_by String?   @db.Uuid
+  addrerss   addrerss? @relation(fields: [address_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
