@@ -7,7 +7,6 @@ export interface companyAttributes {
   name: string;
   website?: string;
   logo?: string;
-  email: string;
   address_id?: string;
   delete?: boolean;
   is_active?: boolean;
@@ -27,7 +26,6 @@ export class company extends Model<companyAttributes, companyCreationAttributes>
   name!: string;
   website?: string;
   logo?: string;
-  email!: string;
   address_id?: string;
   delete?: boolean;
   is_active?: boolean;
@@ -61,11 +59,6 @@ export class company extends Model<companyAttributes, companyCreationAttributes>
     logo: {
       type: DataTypes.STRING,
       allowNull: true
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: "company_email_key"
     },
     address_id: {
       type: DataTypes.UUID,
@@ -109,13 +102,6 @@ export class company extends Model<companyAttributes, companyCreationAttributes>
     schema: 'public',
     timestamps: false,
     indexes: [
-      {
-        name: "company_email_key",
-        unique: true,
-        fields: [
-          { name: "email" },
-        ]
-      },
       {
         name: "company_pkey",
         unique: true,

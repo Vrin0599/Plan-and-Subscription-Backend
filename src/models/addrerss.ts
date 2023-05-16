@@ -4,13 +4,11 @@ import type { company, companyId } from './company';
 
 export interface addrerssAttributes {
   id: string;
-  name: string;
   address_line?: string;
   city: string;
   state: string;
   country: string;
   pincode: number;
-  email: string;
   delete?: boolean;
   is_active?: boolean;
   created_at?: Date;
@@ -26,13 +24,11 @@ export type addrerssCreationAttributes = Optional<addrerssAttributes, addrerssOp
 
 export class addrerss extends Model<addrerssAttributes, addrerssCreationAttributes> implements addrerssAttributes {
   id!: string;
-  name!: string;
   address_line?: string;
   city!: string;
   state!: string;
   country!: string;
   pincode!: number;
-  email!: string;
   delete?: boolean;
   is_active?: boolean;
   created_at?: Date;
@@ -61,10 +57,6 @@ export class addrerss extends Model<addrerssAttributes, addrerssCreationAttribut
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true
     },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
     address_line: {
       type: DataTypes.STRING,
       allowNull: true
@@ -84,11 +76,6 @@ export class addrerss extends Model<addrerssAttributes, addrerssCreationAttribut
     pincode: {
       type: DataTypes.INTEGER,
       allowNull: false
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: "addrerss_email_key"
     },
     delete: {
       type: DataTypes.BOOLEAN,
@@ -124,13 +111,6 @@ export class addrerss extends Model<addrerssAttributes, addrerssCreationAttribut
     schema: 'public',
     timestamps: false,
     indexes: [
-      {
-        name: "addrerss_email_key",
-        unique: true,
-        fields: [
-          { name: "email" },
-        ]
-      },
       {
         name: "addrerss_pkey",
         unique: true,

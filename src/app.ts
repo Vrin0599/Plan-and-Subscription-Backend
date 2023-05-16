@@ -2,6 +2,7 @@ import { join } from "path";
 import AutoLoad, { AutoloadPluginOptions } from "@fastify/autoload";
 import { FastifyPluginAsync } from "fastify";
 import routesV1 from "./routes/v1";
+import { globalIterface, giveMeStatusCodes } from "./utils";
 
 export type AppOptions = {
   // Place your custom options for app below here.
@@ -9,6 +10,12 @@ export type AppOptions = {
 
 // Pass --options via CLI arguments in command to enable these options.
 const options: AppOptions = {};
+
+declare global {
+  var status_codes: globalIterface;
+}
+
+global.status_codes = giveMeStatusCodes();
 
 const app: FastifyPluginAsync<AppOptions> = async (
   fastify,

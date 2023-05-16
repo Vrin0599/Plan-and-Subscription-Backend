@@ -6,7 +6,6 @@ CREATE TABLE "company" (
   "name" varchar NOT NULL,
   "website" varchar,
   "logo" varchar,
-  "email" varchar UNIQUE NOT NULL,
   "address_id" uuid,
   "delete" boolean DEFAULT false,
   "is_active" boolean DEFAULT false,
@@ -18,13 +17,11 @@ CREATE TABLE "company" (
 
 CREATE TABLE "addrerss" (
   "id" uuid PRIMARY KEY DEFAULT (gen_random_uuid()),
-  "name" varchar NOT NULL,
   "address_line" varchar,
   "city" varchar NOT NULL,
   "state" varchar NOT NULL,
   "country" varchar NOT NULL,
   "pincode" int NOT NULL,
-  "email" varchar UNIQUE NOT NULL,
   "delete" boolean DEFAULT false,
   "is_active" boolean DEFAULT false,
   "created_at" timestamp DEFAULT (CURRENT_TIMESTAMP),
