@@ -4,6 +4,7 @@ import {
   createCompanyController,
   getCompanyController,
   updateCompanyController,
+  deleteCompanyControler,
 } from "../../../../controllers";
 
 const company: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
@@ -39,6 +40,19 @@ const company: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
     async (req: any, reply) => {
       try {
         const response = await updateCompanyController(req.body);
+        reply.code(response.status).send(response);
+      } catch (err) {
+        reply.code(500).send(err);
+      }
+    }
+  );
+
+  fastify.delete(
+    "/delete",
+    { schema: Schema.deleteCompanySchema },
+    async (req: any, reply) => {
+      try {
+        const response = await deleteCompanyControler(req.body);
         reply.code(response.status).send(response);
       } catch (err) {
         reply.code(500).send(err);
