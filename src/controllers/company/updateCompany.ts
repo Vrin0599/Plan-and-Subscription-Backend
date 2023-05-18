@@ -1,7 +1,7 @@
 // import { addrerss } from "../../models/addrerss";
 import { addrerss } from "../../models/addrerss";
 import { company } from "../../models/company";
-import { ResponseType } from "../../utils";
+import { ResponseType, UserDetails } from "../../utils";
 
 interface Payload {
   company_id: string;
@@ -16,7 +16,10 @@ interface Payload {
   pincode?: number;
 }
 
-export const updateCompanyController = async (payload: Payload) => {
+export const updateCompanyController = async (
+  payload: Payload,
+  user: UserDetails
+) => {
   return new Promise<ResponseType>(async (resolve, reject) => {
     try {
       const response = await company.update(
@@ -24,6 +27,8 @@ export const updateCompanyController = async (payload: Payload) => {
           name: payload.name,
           website: payload.website,
           logo: payload.logo,
+          updated_at: new Date(),
+          updated_by: user.user_profile_id,
         },
         {
           where: {
@@ -40,6 +45,8 @@ export const updateCompanyController = async (payload: Payload) => {
           state: payload.state,
           country: payload.country,
           pincode: payload.pincode,
+          updated_at: new Date(),
+          updated_by: user.user_profile_id,
         },
         {
           where: {

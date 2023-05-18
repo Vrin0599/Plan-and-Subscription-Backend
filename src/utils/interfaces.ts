@@ -23,3 +23,11 @@ export interface globalIterface {
   Conflict: ResponseType;
   error: ResponseType;
 }
+
+export interface UserDetails {
+  user_id?: number;
+  username?: string;
+  email?: string;
+  first_name?: string;
+  user_profile_id?: string;
+}

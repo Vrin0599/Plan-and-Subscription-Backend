@@ -13,7 +13,10 @@ const company: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
     { schema: Schema.createCompanySchema },
     async (req: any, reply) => {
       try {
-        const response = await createCompanyController(req.body);
+        const response = await createCompanyController(
+          req.body,
+          req.headers?.userDetails
+        );
         reply.code(response.status).send(response);
       } catch (err) {
         reply.code(500).send(err);
@@ -26,7 +29,10 @@ const company: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
     { schema: Schema.getCompanySchema },
     async (req: any, reply) => {
       try {
-        const response = await getCompanyController(req.body);
+        const response = await getCompanyController(
+          req.body,
+          req.headers?.userDetails
+        );
         reply.code(response.status).send(response);
       } catch (err) {
         reply.code(500).send(err);
@@ -39,7 +45,10 @@ const company: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
     { schema: Schema.updateCompanySchema },
     async (req: any, reply) => {
       try {
-        const response = await updateCompanyController(req.body);
+        const response = await updateCompanyController(
+          req.body,
+          req.headers?.userDetails
+        );
         reply.code(response.status).send(response);
       } catch (err) {
         reply.code(500).send(err);

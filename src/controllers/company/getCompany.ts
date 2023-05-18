@@ -1,17 +1,20 @@
+import { Op } from "sequelize";
 import { addrerss } from "../../models/addrerss";
 import { company } from "../../models/company";
-import { ResponseType } from "../../utils";
+import { ResponseType, UserDetails } from "../../utils";
 
 interface Payload {
   offset?: number;
   limit?: number;
+  search?: string;
 }
 
-export const getCompanyController = (payload: Payload) => {
+export const getCompanyController = (payload: Payload, user: UserDetails) => {
   return new Promise<ResponseType>(async (resolve, reject) => {
     try {
       const offset = payload.offset ? payload.offset : 0;
       const limit = payload.limit ? payload.limit : 0;
+      const search = payload.search ? payload.search : "";
 
       const query = await company.findAndCountAll({
         offset,
@@ -30,6 +33,13 @@ export const getCompanyController = (payload: Payload) => {
             ],
           },
         ],
+        where: {
+          created_by: user.user_profile_id,
+          name: {
+            [Op.iLike]: `%${search}%`,
+          },
+        },
+        distinct: true,
       });
       resolve({
         ...globalThis.status_codes?.success,

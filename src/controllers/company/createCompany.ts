@@ -1,7 +1,7 @@
 import { addrerss } from "../../models/addrerss";
 import { company } from "../../models/company";
 
-import { ResponseType } from "../../utils";
+import { ResponseType, UserDetails } from "../../utils";
 
 interface CreateCompanyPayload {
   name: string;
@@ -15,7 +15,8 @@ interface CreateCompanyPayload {
 }
 
 export const createCompanyController = async (
-  payload: CreateCompanyPayload
+  payload: CreateCompanyPayload,
+  user: UserDetails
 ) => {
   return new Promise<ResponseType>(async (resolve, reject) => {
     try {
@@ -26,6 +27,8 @@ export const createCompanyController = async (
         country: payload.country,
         pincode: payload.pincode,
         is_active: true,
+        created_by: user.user_profile_id,
+        updated_by: user.user_profile_id,
       });
       createAddress = createAddress.toJSON();
 
@@ -35,6 +38,8 @@ export const createCompanyController = async (
         logo: payload.logo,
         address_id: createAddress.id,
         is_active: true,
+        created_by: user.user_profile_id,
+        updated_by: user.user_profile_id,
       });
       resolve({
         ...globalThis.status_codes.success,

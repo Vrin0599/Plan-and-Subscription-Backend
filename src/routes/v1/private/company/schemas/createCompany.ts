@@ -32,5 +32,12 @@ const createCompanyBody: object = {
 export const createCompanySchema: object = {
   tags: ["Company"],
   description: "To create new company",
+  headers: {
+    type: "object",
+    required: ["authorization"],
+    properties: {
+      authorization: { type: "string" },
+    },
+  },
   body: createCompanyBody,
 };

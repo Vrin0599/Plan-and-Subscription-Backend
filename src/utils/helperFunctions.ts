@@ -1,3 +1,4 @@
+import axios from "axios";
 import { globalIterface } from "./interfaces";
 
 export const giveMeStatusCodes = (): globalIterface => {
@@ -11,4 +12,13 @@ export const giveMeStatusCodes = (): globalIterface => {
     Conflict: { status: 409, api_status: "API-CONFLICT" },
     error: { status: 500, api_status: "API-ERROR" },
   };
+};
+
+export const authAxios = axios.create({
+  baseURL: process.env.FRAMEWORK_SHELL_URL,
+});
+
+export const getUserProfile = (token: string) => {
+  const headers = { authorization: token, "Content-Type": "application/json" };
+  return authAxios.get("/auth/get_user_details", { headers });
 };
