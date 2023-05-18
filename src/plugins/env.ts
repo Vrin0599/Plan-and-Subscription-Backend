@@ -11,6 +11,7 @@ const schema = {
     "DB_PORT",
     "DB_HOST",
     "DB_DIALECT",
+    "FRAMEWORK_SHELL_URL",
   ],
   properties: {
     DB_NAME: { type: "string" },
@@ -19,6 +20,7 @@ const schema = {
     DB_PORT: { type: "string" },
     DB_HOST: { type: "string" },
     DB_DIALECT: { type: "string" },
+    FRAMEWORK_SHELL_URL: { type: "string" },
   },
 } as const;
 
