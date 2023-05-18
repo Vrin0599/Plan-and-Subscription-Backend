@@ -87,10 +87,10 @@ export const getCompanySchema: object = {
         status: {
           type: "number",
         },
-        api_staus: {
+        api_status: {
           type: "string",
         },
-        meaasage: {
+        message: {
           type: "string",
         },
       },

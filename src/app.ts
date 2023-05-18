@@ -49,12 +49,14 @@ const app: FastifyPluginAsync<AppOptions> = async (
         request.headers["userDetails"] = userProfile?.data?.data;
         return;
       }
-      return;
+      return reply.code(globalThis.status_codes.un_authorised.status).send({
+        ...globalThis.status_codes.un_authorised,
+        message: "In-valid token",
+      });
     } catch (err) {
-      return reply.code(500).send({
-        statusCode: 500,
-        type: "error",
-        message: "token in In-valid",
+      return reply.code(globalThis.status_codes.error.status).send({
+        ...globalThis.status_codes.error,
+        message: "In-valid token",
       });
     }
   });
