@@ -54,7 +54,7 @@ export const getCompanySchema: object = {
                   logo: {
                     type: "string",
                   },
-                  addrerss: {
+                  address: {
                     type: "object",
                     properties: {
                       address_line: {

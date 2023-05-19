@@ -1,5 +1,5 @@
 import { Op } from "sequelize";
-import { addrerss } from "../../models/addrerss";
+import { address } from "../../models/address";
 import { company } from "../../models/company";
 import { ResponseType, UserDetails } from "../../utils";
 
@@ -21,8 +21,8 @@ export const getCompanyController = (payload: Payload, user: UserDetails) => {
         limit,
         include: [
           {
-            model: addrerss,
-            as: "addrerss",
+            model: address,
+            as: "address",
             attributes: [
               "id",
               "address_line",

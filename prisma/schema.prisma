@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model addrerss {
+model address {
   id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   address_line String?   @db.VarChar
   city         String    @db.VarChar
@@ -35,5 +35,44 @@ model company {
   updated_at DateTime? @default(now()) @db.Timestamp(6)
   created_by String?   @db.Uuid
   updated_by String?   @db.Uuid
-  addrerss   addrerss? @relation(fields: [address_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  address    address?  @relation(fields: [address_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model feature {
+  id                   String                 @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name                 String                 @db.VarChar
+  delete               Boolean?               @default(false)
+  is_active            Boolean?               @default(false)
+  created_at           DateTime?              @default(now()) @db.Timestamp(6)
+  updated_at           DateTime?              @default(now()) @db.Timestamp(6)
+  created_by           String?                @db.Uuid
+  updated_by           String?                @db.Uuid
+  feature_group_maping feature_group_maping[]
+}
+
+model feature_group {
+  id                   String                 @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name                 String                 @db.VarChar
+  description          String?                @db.VarChar
+  delete               Boolean?               @default(false)
+  is_active            Boolean?               @default(false)
+  created_at           DateTime?              @default(now()) @db.Timestamp(6)
+  updated_at           DateTime?              @default(now()) @db.Timestamp(6)
+  created_by           String?                @db.Uuid
+  updated_by           String?                @db.Uuid
+  feature_group_maping feature_group_maping[]
+}
+
+model feature_group_maping {
+  id               String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  feature_group_id String         @db.Uuid
+  feature_id       String         @db.Uuid
+  delete           Boolean?       @default(false)
+  is_active        Boolean?       @default(false)
+  created_at       DateTime?      @default(now()) @db.Timestamp(6)
+  updated_at       DateTime?      @default(now()) @db.Timestamp(6)
+  created_by       String?        @db.Uuid
+  updated_by       String?        @db.Uuid
+  feature          feature?       @relation(fields: [feature_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  feature_group    feature_group? @relation(fields: [feature_group_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }

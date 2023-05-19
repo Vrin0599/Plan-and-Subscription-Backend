@@ -2,7 +2,7 @@ import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 import type { company, companyId } from './company';
 
-export interface addrerssAttributes {
+export interface addressAttributes {
   id: string;
   address_line?: string;
   city: string;
@@ -17,12 +17,12 @@ export interface addrerssAttributes {
   updated_by?: string;
 }
 
-export type addrerssPk = "id";
-export type addrerssId = addrerss[addrerssPk];
-export type addrerssOptionalAttributes = "id" | "address_line" | "delete" | "is_active" | "created_at" | "updated_at" | "created_by" | "updated_by";
-export type addrerssCreationAttributes = Optional<addrerssAttributes, addrerssOptionalAttributes>;
+export type addressPk = "id";
+export type addressId = address[addressPk];
+export type addressOptionalAttributes = "id" | "address_line" | "delete" | "is_active" | "created_at" | "updated_at" | "created_by" | "updated_by";
+export type addressCreationAttributes = Optional<addressAttributes, addressOptionalAttributes>;
 
-export class addrerss extends Model<addrerssAttributes, addrerssCreationAttributes> implements addrerssAttributes {
+export class address extends Model<addressAttributes, addressCreationAttributes> implements addressAttributes {
   id!: string;
   address_line?: string;
   city!: string;
@@ -36,7 +36,7 @@ export class addrerss extends Model<addrerssAttributes, addrerssCreationAttribut
   created_by?: string;
   updated_by?: string;
 
-  // addrerss hasMany company via address_id
+  // address hasMany company via address_id
   companies!: company[];
   getCompanies!: Sequelize.HasManyGetAssociationsMixin<company>;
   setCompanies!: Sequelize.HasManySetAssociationsMixin<company, companyId>;
@@ -49,8 +49,8 @@ export class addrerss extends Model<addrerssAttributes, addrerssCreationAttribut
   hasCompanies!: Sequelize.HasManyHasAssociationsMixin<company, companyId>;
   countCompanies!: Sequelize.HasManyCountAssociationsMixin;
 
-  static initModel(sequelize: Sequelize.Sequelize): typeof addrerss {
-    return addrerss.init({
+  static initModel(sequelize: Sequelize.Sequelize): typeof address {
+    return address.init({
     id: {
       type: DataTypes.UUID,
       allowNull: false,
@@ -107,12 +107,12 @@ export class addrerss extends Model<addrerssAttributes, addrerssCreationAttribut
     }
   }, {
     sequelize,
-    tableName: 'addrerss',
+    tableName: 'address',
     schema: 'public',
     timestamps: false,
     indexes: [
       {
-        name: "addrerss_pkey",
+        name: "address_pkey",
         unique: true,
         fields: [
           { name: "id" },

@@ -1,4 +1,4 @@
-import { addrerss } from "../../models/addrerss";
+import { address } from "../../models/address";
 import { company } from "../../models/company";
 
 import { ResponseType, UserDetails } from "../../utils";
@@ -20,7 +20,7 @@ export const createCompanyController = async (
 ) => {
   return new Promise<ResponseType>(async (resolve, reject) => {
     try {
-      let createAddress = await addrerss.create({
+      let createAddress = await address.create({
         address_line: payload.address_line,
         city: payload.city,
         state: payload.state,

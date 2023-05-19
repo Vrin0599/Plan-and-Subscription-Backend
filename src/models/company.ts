@@ -1,6 +1,6 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
-import type { addrerss, addrerssId } from './addrerss';
+import type { address, addressId } from './address';
 
 export interface companyAttributes {
   id: string;
@@ -34,11 +34,11 @@ export class company extends Model<companyAttributes, companyCreationAttributes>
   created_by?: string;
   updated_by?: string;
 
-  // company belongsTo addrerss via address_id
-  address!: addrerss;
-  getAddress!: Sequelize.BelongsToGetAssociationMixin<addrerss>;
-  setAddress!: Sequelize.BelongsToSetAssociationMixin<addrerss, addrerssId>;
-  createAddress!: Sequelize.BelongsToCreateAssociationMixin<addrerss>;
+  // company belongsTo address via address_id
+  address!: address;
+  getAddress!: Sequelize.BelongsToGetAssociationMixin<address>;
+  setAddress!: Sequelize.BelongsToSetAssociationMixin<address, addressId>;
+  createAddress!: Sequelize.BelongsToCreateAssociationMixin<address>;
 
   static initModel(sequelize: Sequelize.Sequelize): typeof company {
     return company.init({
@@ -64,7 +64,7 @@ export class company extends Model<companyAttributes, companyCreationAttributes>
       type: DataTypes.UUID,
       allowNull: true,
       references: {
-        model: 'addrerss',
+        model: 'address',
         key: 'id'
       }
     },
