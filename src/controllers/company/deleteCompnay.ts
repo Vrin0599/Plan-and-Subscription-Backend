@@ -1,4 +1,4 @@
-import { addrerss } from "../../models/addrerss";
+import { address } from "../../models/address";
 import { company } from "../../models/company";
 import { ResponseType } from "../../utils";
 
@@ -16,7 +16,7 @@ export const deleteCompanyControler = async (payload: Payload) => {
         },
       });
 
-      await addrerss.destroy({
+      await address.destroy({
         where: {
           id: payload.address_id,
         },

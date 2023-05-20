@@ -76,7 +76,7 @@ export class company extends Model<companyAttributes, companyCreationAttributes>
     is_active: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
-      defaultValue: false
+      defaultValue: true
     },
     created_at: {
       type: DataTypes.DATE,

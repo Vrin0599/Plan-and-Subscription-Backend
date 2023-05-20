@@ -1,5 +1,4 @@
-// import { addrerss } from "../../models/addrerss";
-import { addrerss } from "../../models/addrerss";
+import { address } from "../../models/address";
 import { company } from "../../models/company";
 import { ResponseType, UserDetails } from "../../utils";
 
@@ -38,7 +37,7 @@ export const updateCompanyController = async (
         }
       );
 
-      await addrerss.update(
+      await address.update(
         {
           address_line: payload.address_line,
           city: payload.city,

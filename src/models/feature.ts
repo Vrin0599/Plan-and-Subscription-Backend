@@ -61,7 +61,7 @@ export class feature extends Model<featureAttributes, featureCreationAttributes>
     is_active: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
-      defaultValue: false
+      defaultValue: true
     },
     created_at: {
       type: DataTypes.DATE,

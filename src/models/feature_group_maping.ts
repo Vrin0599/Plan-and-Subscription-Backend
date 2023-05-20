@@ -74,7 +74,7 @@ export class feature_group_maping extends Model<feature_group_mapingAttributes, 
     is_active: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
-      defaultValue: false
+      defaultValue: true
     },
     created_at: {
       type: DataTypes.DATE,

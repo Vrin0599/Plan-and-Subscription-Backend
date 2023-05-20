@@ -85,7 +85,7 @@ export class address extends Model<addressAttributes, addressCreationAttributes>
     is_active: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
-      defaultValue: false
+      defaultValue: true
     },
     created_at: {
       type: DataTypes.DATE,

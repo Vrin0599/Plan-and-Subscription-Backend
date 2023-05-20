@@ -15,7 +15,7 @@ model address {
   country      String    @db.VarChar
   pincode      Int
   delete       Boolean?  @default(false)
-  is_active    Boolean?  @default(false)
+  is_active    Boolean?  @default(true)
   created_at   DateTime? @default(now()) @db.Timestamp(6)
   updated_at   DateTime? @default(now()) @db.Timestamp(6)
   created_by   String?   @db.Uuid
@@ -30,7 +30,7 @@ model company {
   logo       String?   @db.VarChar
   address_id String?   @db.Uuid
   delete     Boolean?  @default(false)
-  is_active  Boolean?  @default(false)
+  is_active  Boolean?  @default(true)
   created_at DateTime? @default(now()) @db.Timestamp(6)
   updated_at DateTime? @default(now()) @db.Timestamp(6)
   created_by String?   @db.Uuid
@@ -42,7 +42,7 @@ model feature {
   id                   String                 @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name                 String                 @db.VarChar
   delete               Boolean?               @default(false)
-  is_active            Boolean?               @default(false)
+  is_active            Boolean?               @default(true)
   created_at           DateTime?              @default(now()) @db.Timestamp(6)
   updated_at           DateTime?              @default(now()) @db.Timestamp(6)
   created_by           String?                @db.Uuid
@@ -55,7 +55,7 @@ model feature_group {
   name                 String                 @db.VarChar
   description          String?                @db.VarChar
   delete               Boolean?               @default(false)
-  is_active            Boolean?               @default(false)
+  is_active            Boolean?               @default(true)
   created_at           DateTime?              @default(now()) @db.Timestamp(6)
   updated_at           DateTime?              @default(now()) @db.Timestamp(6)
   created_by           String?                @db.Uuid
@@ -68,7 +68,7 @@ model feature_group_maping {
   feature_group_id String         @db.Uuid
   feature_id       String         @db.Uuid
   delete           Boolean?       @default(false)
-  is_active        Boolean?       @default(false)
+  is_active        Boolean?       @default(true)
   created_at       DateTime?      @default(now()) @db.Timestamp(6)
   updated_at       DateTime?      @default(now()) @db.Timestamp(6)
   created_by       String?        @db.Uuid
