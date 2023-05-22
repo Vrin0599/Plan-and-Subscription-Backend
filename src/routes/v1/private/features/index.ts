@@ -3,6 +3,9 @@ import * as Schema from "./schemas";
 import {
   createFeatureController,
   createFeatureGroupController,
+  getFeaturesController,
+  deleteFeatureController,
+  deleteFeatureGroupController,
 } from "../../../../controllers";
 
 const feature: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
@@ -31,6 +34,51 @@ const feature: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
           req.body,
           req.headers?.userDetails
         );
+
+        reply.code(response.status).send(response);
+      } catch (err) {
+        reply.code(500).send(err);
+      }
+    }
+  );
+
+  fastify.post(
+    "/",
+    { schema: Schema.getFeaturesSchema },
+    async (req: any, reply) => {
+      try {
+        const response = await getFeaturesController(
+          req.body,
+          req.headers?.userDetails
+        );
+
+        reply.code(response.status).send(response);
+      } catch (err) {
+        reply.code(500).send(err);
+      }
+    }
+  );
+
+  fastify.delete(
+    "/feature",
+    { schema: Schema.deleteFeatureSchema },
+    async (req: any, reply) => {
+      try {
+        const response = await deleteFeatureController(req.body);
+
+        reply.code(response.status).send(response);
+      } catch (err) {
+        reply.code(500).send(err);
+      }
+    }
+  );
+
+  fastify.delete(
+    "/featureGroup",
+    { schema: Schema.deleteFeatureGroupSchema },
+    async (req: any, reply) => {
+      try {
+        const response = await deleteFeatureGroupController(req.body);
 
         reply.code(response.status).send(response);
       } catch (err) {
