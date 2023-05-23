@@ -1,5 +1,6 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
+import type { add_on, add_onId } from './add_on';
 import type { feature_group_maping, feature_group_mapingId } from './feature_group_maping';
 
 export interface featureAttributes {
@@ -28,6 +29,18 @@ export class feature extends Model<featureAttributes, featureCreationAttributes>
   created_by?: string;
   updated_by?: string;
 
+  // feature hasMany add_on via feature_id
+  add_ons!: add_on[];
+  getAdd_ons!: Sequelize.HasManyGetAssociationsMixin<add_on>;
+  setAdd_ons!: Sequelize.HasManySetAssociationsMixin<add_on, add_onId>;
+  addAdd_on!: Sequelize.HasManyAddAssociationMixin<add_on, add_onId>;
+  addAdd_ons!: Sequelize.HasManyAddAssociationsMixin<add_on, add_onId>;
+  createAdd_on!: Sequelize.HasManyCreateAssociationMixin<add_on>;
+  removeAdd_on!: Sequelize.HasManyRemoveAssociationMixin<add_on, add_onId>;
+  removeAdd_ons!: Sequelize.HasManyRemoveAssociationsMixin<add_on, add_onId>;
+  hasAdd_on!: Sequelize.HasManyHasAssociationMixin<add_on, add_onId>;
+  hasAdd_ons!: Sequelize.HasManyHasAssociationsMixin<add_on, add_onId>;
+  countAdd_ons!: Sequelize.HasManyCountAssociationsMixin;
   // feature hasMany feature_group_maping via feature_id
   feature_group_mapings!: feature_group_maping[];
   getFeature_group_mapings!: Sequelize.HasManyGetAssociationsMixin<feature_group_maping>;
