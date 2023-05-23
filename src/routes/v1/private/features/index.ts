@@ -6,6 +6,8 @@ import {
   getFeaturesController,
   deleteFeatureController,
   deleteFeatureGroupController,
+  updateFeatureController,
+  updateFeatureGroupController,
 } from "../../../../controllers";
 
 const feature: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
@@ -80,6 +82,33 @@ const feature: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
       try {
         const response = await deleteFeatureGroupController(req.body);
 
+        reply.code(response.status).send(response);
+      } catch (err) {
+        reply.code(500).send(err);
+      }
+    }
+  );
+
+  fastify.put(
+    "/feature",
+    { schema: Schema.updateFeatureSchema },
+    async (req: any, reply) => {
+      try {
+        const response = await updateFeatureController(req.body);
+
+        reply.code(response.status).send(response);
+      } catch (err) {
+        reply.code(500).send(err);
+      }
+    }
+  );
+
+  fastify.put(
+    "/featureGroup",
+    { schema: Schema.updateFeatureGroupSchema },
+    async (req: any, reply) => {
+      try {
+        const response = await updateFeatureGroupController(req.body);
         reply.code(response.status).send(response);
       } catch (err) {
         reply.code(500).send(err);

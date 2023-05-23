@@ -1,6 +1,6 @@
 const createFeatureGroupBody: object = {
   type: "object",
-  required: ["name"],
+  required: ["name", "features"],
   properties: {
     name: {
       type: "string",

@@ -62,7 +62,6 @@ export const getFeaturesController = async (
         data: query,
       });
     } catch (err) {
-      console.log(err);
       reject({
         ...globalThis.status_codes?.error,
         message: "Cannot fetch feature details, try again!",
