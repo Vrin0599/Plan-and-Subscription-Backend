@@ -19,12 +19,12 @@ export const deleteChargesController = async (
       resolve({
         ...globalThis.status_codes.success,
         data: {},
-        message: "Feature deleted sucessfully!",
+        message: "Charges deleted sucessfully!",
       });
     } catch (err) {
       reject({
         ...globalThis.status_codes.error,
-        message: "Cannot delete feature, try again!",
+        message: "Cannot delete charges, try again!",
       });
     }
   });
