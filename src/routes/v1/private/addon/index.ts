@@ -2,6 +2,7 @@ import { FastifyPluginAsync } from "fastify";
 import * as Schema from "./schemas";
 import {
   createAddOnController,
+  getAddOnController,
   updateAddOnController,
   deleteAddOnController,
 } from "../../../../controllers";
@@ -16,6 +17,19 @@ const addOn: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
           req.body,
           req.headers?.userDetails
         );
+        reply.code(response.status).send(response);
+      } catch (err) {
+        reply.code(500).send(err);
+      }
+    }
+  );
+
+  fastify.post(
+    "/",
+    { schema: Schema.getAddOnSchema },
+    async (req: any, reply) => {
+      try {
+        const response = await getAddOnController(req.body);
         reply.code(response.status).send(response);
       } catch (err) {
         reply.code(500).send(err);
