@@ -3,6 +3,8 @@ import { add_on as _add_on } from "./add_on";
 import type { add_onAttributes, add_onCreationAttributes } from "./add_on";
 import { address as _address } from "./address";
 import type { addressAttributes, addressCreationAttributes } from "./address";
+import { charge as _charge } from "./charge";
+import type { chargeAttributes, chargeCreationAttributes } from "./charge";
 import { company as _company } from "./company";
 import type { companyAttributes, companyCreationAttributes } from "./company";
 import { feature as _feature } from "./feature";
@@ -15,6 +17,7 @@ import type { feature_group_mapingAttributes, feature_group_mapingCreationAttrib
 export {
   _add_on as add_on,
   _address as address,
+  _charge as charge,
   _company as company,
   _feature as feature,
   _feature_group as feature_group,
@@ -26,6 +29,8 @@ export type {
   add_onCreationAttributes,
   addressAttributes,
   addressCreationAttributes,
+  chargeAttributes,
+  chargeCreationAttributes,
   companyAttributes,
   companyCreationAttributes,
   featureAttributes,
@@ -39,6 +44,7 @@ export type {
 export function initModels(sequelize: Sequelize) {
   const add_on = _add_on.initModel(sequelize);
   const address = _address.initModel(sequelize);
+  const charge = _charge.initModel(sequelize);
   const company = _company.initModel(sequelize);
   const feature = _feature.initModel(sequelize);
   const feature_group = _feature_group.initModel(sequelize);
@@ -58,6 +64,7 @@ export function initModels(sequelize: Sequelize) {
   return {
     add_on: add_on,
     address: address,
+    charge: charge,
     company: company,
     feature: feature,
     feature_group: feature_group,

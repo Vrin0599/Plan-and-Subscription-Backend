@@ -94,3 +94,15 @@ model add_on {
   feature          feature?       @relation(fields: [feature_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   feature_group    feature_group? @relation(fields: [feature_group_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
+
+model charges {
+  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name        String    @db.VarChar
+  description String?   @db.VarChar
+  delete      Boolean?  @default(false)
+  is_active   Boolean?  @default(true)
+  created_at  DateTime? @default(now()) @db.Timestamp(6)
+  updated_at  DateTime? @default(now()) @db.Timestamp(6)
+  created_by  String?   @db.Uuid
+  updated_by  String?   @db.Uuid
+}
