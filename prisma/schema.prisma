@@ -114,7 +114,7 @@ model plans {
   id                 String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name               String         @db.VarChar
   description        String?        @db.VarChar
-  pricing            String         @db.Uuid
+  pricing            String         @db.VarChar
   is_recomended      Boolean?       @default(false)
   is_metered_billing Boolean?       @default(false)
   feature_group_id   String         @db.Uuid

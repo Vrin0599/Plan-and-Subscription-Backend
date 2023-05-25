@@ -3,7 +3,7 @@ CREATE TABLE "plans" (
     "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "name" VARCHAR NOT NULL,
     "description" VARCHAR,
-    "pricing" UUID NOT NULL,
+    "pricing" VARCHAR NOT NULL,
     "is_recomended" BOOLEAN DEFAULT false,
     "is_metered_billing" BOOLEAN DEFAULT false,
     "feature_group_id" UUID NOT NULL,

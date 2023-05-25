@@ -77,7 +77,7 @@ export class plan extends Model<planAttributes, planCreationAttributes> implemen
       allowNull: true
     },
     pricing: {
-      type: DataTypes.UUID,
+      type: DataTypes.STRING,
       allowNull: false
     },
     is_recomended: {
