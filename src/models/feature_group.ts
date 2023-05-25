@@ -2,6 +2,7 @@ import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 import type { add_on, add_onId } from './add_on';
 import type { feature_group_maping, feature_group_mapingId } from './feature_group_maping';
+import type { plan, planId } from './plan';
 
 export interface feature_groupAttributes {
   id: string;
@@ -55,6 +56,18 @@ export class feature_group extends Model<feature_groupAttributes, feature_groupC
   hasFeature_group_maping!: Sequelize.HasManyHasAssociationMixin<feature_group_maping, feature_group_mapingId>;
   hasFeature_group_mapings!: Sequelize.HasManyHasAssociationsMixin<feature_group_maping, feature_group_mapingId>;
   countFeature_group_mapings!: Sequelize.HasManyCountAssociationsMixin;
+  // feature_group hasMany plan via feature_group_id
+  plans!: plan[];
+  getPlans!: Sequelize.HasManyGetAssociationsMixin<plan>;
+  setPlans!: Sequelize.HasManySetAssociationsMixin<plan, planId>;
+  addPlan!: Sequelize.HasManyAddAssociationMixin<plan, planId>;
+  addPlans!: Sequelize.HasManyAddAssociationsMixin<plan, planId>;
+  createPlan!: Sequelize.HasManyCreateAssociationMixin<plan>;
+  removePlan!: Sequelize.HasManyRemoveAssociationMixin<plan, planId>;
+  removePlans!: Sequelize.HasManyRemoveAssociationsMixin<plan, planId>;
+  hasPlan!: Sequelize.HasManyHasAssociationMixin<plan, planId>;
+  hasPlans!: Sequelize.HasManyHasAssociationsMixin<plan, planId>;
+  countPlans!: Sequelize.HasManyCountAssociationsMixin;
 
   static initModel(sequelize: Sequelize.Sequelize): typeof feature_group {
     return feature_group.init({

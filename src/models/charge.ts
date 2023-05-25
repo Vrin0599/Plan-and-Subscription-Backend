@@ -1,5 +1,6 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
+import type { plan, planId } from './plan';
 
 export interface chargeAttributes {
   id: string;
@@ -29,6 +30,18 @@ export class charge extends Model<chargeAttributes, chargeCreationAttributes> im
   created_by?: string;
   updated_by?: string;
 
+  // charge hasMany plan via charge_id
+  plans!: plan[];
+  getPlans!: Sequelize.HasManyGetAssociationsMixin<plan>;
+  setPlans!: Sequelize.HasManySetAssociationsMixin<plan, planId>;
+  addPlan!: Sequelize.HasManyAddAssociationMixin<plan, planId>;
+  addPlans!: Sequelize.HasManyAddAssociationsMixin<plan, planId>;
+  createPlan!: Sequelize.HasManyCreateAssociationMixin<plan>;
+  removePlan!: Sequelize.HasManyRemoveAssociationMixin<plan, planId>;
+  removePlans!: Sequelize.HasManyRemoveAssociationsMixin<plan, planId>;
+  hasPlan!: Sequelize.HasManyHasAssociationMixin<plan, planId>;
+  hasPlans!: Sequelize.HasManyHasAssociationsMixin<plan, planId>;
+  countPlans!: Sequelize.HasManyCountAssociationsMixin;
 
   static initModel(sequelize: Sequelize.Sequelize): typeof charge {
     return charge.init({

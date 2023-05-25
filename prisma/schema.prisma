@@ -63,6 +63,7 @@ model feature_group {
   updated_by           String?                @db.Uuid
   feature_group_maping feature_group_maping[]
   add_on               add_on[]
+  plans                plans[]
 }
 
 model feature_group_maping {
@@ -93,6 +94,7 @@ model add_on {
   updated_by       String?        @db.Uuid
   feature          feature?       @relation(fields: [feature_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   feature_group    feature_group? @relation(fields: [feature_group_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  plans            plans[]
 }
 
 model charges {
@@ -105,4 +107,26 @@ model charges {
   updated_at  DateTime? @default(now()) @db.Timestamp(6)
   created_by  String?   @db.Uuid
   updated_by  String?   @db.Uuid
+  plans       plans[]
+}
+
+model plans {
+  id                 String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name               String         @db.VarChar
+  description        String?        @db.VarChar
+  pricing            String         @db.Uuid
+  is_recomended      Boolean?       @default(false)
+  is_metered_billing Boolean?       @default(false)
+  feature_group_id   String         @db.Uuid
+  add_on_id          String         @db.Uuid
+  charge_id          String         @db.Uuid
+  delete             Boolean?       @default(false)
+  is_active          Boolean?       @default(true)
+  created_at         DateTime?      @default(now()) @db.Timestamp(6)
+  updated_at         DateTime?      @default(now()) @db.Timestamp(6)
+  created_by         String?        @db.Uuid
+  updated_by         String?        @db.Uuid
+  feature_group      feature_group? @relation(fields: [feature_group_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  add_on             add_on?        @relation(fields: [add_on_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  charges            charges?       @relation(fields: [charge_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
