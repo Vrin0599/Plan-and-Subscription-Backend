@@ -3,6 +3,8 @@ import * as Schema from "./schemas";
 import {
   createPlansController,
   getPlansController,
+  updatePlansController,
+  deletePlansController,
 } from "../../../../controllers";
 
 const plans: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
@@ -31,6 +33,32 @@ const plans: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
           req.body,
           req.headers?.userDetails
         );
+        reply.code(response.status).send(response);
+      } catch (err) {
+        reply.code(500).send(err);
+      }
+    }
+  );
+
+  fastify.put(
+    "/",
+    { schema: Schema.updatePlansSchema },
+    async (req: any, reply) => {
+      try {
+        const response = await updatePlansController(req.body);
+        reply.code(response.status).send(response);
+      } catch (err) {
+        reply.code(500).send(err);
+      }
+    }
+  );
+
+  fastify.delete(
+    "/",
+    { schema: Schema.updatePlansSchema },
+    async (req: any, reply) => {
+      try {
+        const response = await deletePlansController(req.body);
         reply.code(response.status).send(response);
       } catch (err) {
         reply.code(500).send(err);
