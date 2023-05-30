@@ -2,6 +2,7 @@ import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 import type { feature, featureId } from './feature';
 import type { feature_group, feature_groupId } from './feature_group';
+import type { plan_add_on_mapping, plan_add_on_mappingId } from './plan_add_on_mapping';
 import type { plan, planId } from './plan';
 
 export interface add_onAttributes {
@@ -36,7 +37,19 @@ export class add_on extends Model<add_onAttributes, add_onCreationAttributes> im
   created_by?: string;
   updated_by?: string;
 
-  // add_on hasMany plan via add_on_id
+  // add_on hasMany plan_add_on_mapping via add_on_id
+  plan_add_on_mappings!: plan_add_on_mapping[];
+  getPlan_add_on_mappings!: Sequelize.HasManyGetAssociationsMixin<plan_add_on_mapping>;
+  setPlan_add_on_mappings!: Sequelize.HasManySetAssociationsMixin<plan_add_on_mapping, plan_add_on_mappingId>;
+  addPlan_add_on_mapping!: Sequelize.HasManyAddAssociationMixin<plan_add_on_mapping, plan_add_on_mappingId>;
+  addPlan_add_on_mappings!: Sequelize.HasManyAddAssociationsMixin<plan_add_on_mapping, plan_add_on_mappingId>;
+  createPlan_add_on_mapping!: Sequelize.HasManyCreateAssociationMixin<plan_add_on_mapping>;
+  removePlan_add_on_mapping!: Sequelize.HasManyRemoveAssociationMixin<plan_add_on_mapping, plan_add_on_mappingId>;
+  removePlan_add_on_mappings!: Sequelize.HasManyRemoveAssociationsMixin<plan_add_on_mapping, plan_add_on_mappingId>;
+  hasPlan_add_on_mapping!: Sequelize.HasManyHasAssociationMixin<plan_add_on_mapping, plan_add_on_mappingId>;
+  hasPlan_add_on_mappings!: Sequelize.HasManyHasAssociationsMixin<plan_add_on_mapping, plan_add_on_mappingId>;
+  countPlan_add_on_mappings!: Sequelize.HasManyCountAssociationsMixin;
+  // add_on hasMany plan via add_onId
   plans!: plan[];
   getPlans!: Sequelize.HasManyGetAssociationsMixin<plan>;
   setPlans!: Sequelize.HasManySetAssociationsMixin<plan, planId>;

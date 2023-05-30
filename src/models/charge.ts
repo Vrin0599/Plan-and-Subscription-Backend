@@ -1,5 +1,6 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
+import type { plan_charge_mapping, plan_charge_mappingId } from './plan_charge_mapping';
 import type { plan, planId } from './plan';
 
 export interface chargeAttributes {
@@ -30,7 +31,19 @@ export class charge extends Model<chargeAttributes, chargeCreationAttributes> im
   created_by?: string;
   updated_by?: string;
 
-  // charge hasMany plan via charge_id
+  // charge hasMany plan_charge_mapping via charge_id
+  plan_charge_mappings!: plan_charge_mapping[];
+  getPlan_charge_mappings!: Sequelize.HasManyGetAssociationsMixin<plan_charge_mapping>;
+  setPlan_charge_mappings!: Sequelize.HasManySetAssociationsMixin<plan_charge_mapping, plan_charge_mappingId>;
+  addPlan_charge_mapping!: Sequelize.HasManyAddAssociationMixin<plan_charge_mapping, plan_charge_mappingId>;
+  addPlan_charge_mappings!: Sequelize.HasManyAddAssociationsMixin<plan_charge_mapping, plan_charge_mappingId>;
+  createPlan_charge_mapping!: Sequelize.HasManyCreateAssociationMixin<plan_charge_mapping>;
+  removePlan_charge_mapping!: Sequelize.HasManyRemoveAssociationMixin<plan_charge_mapping, plan_charge_mappingId>;
+  removePlan_charge_mappings!: Sequelize.HasManyRemoveAssociationsMixin<plan_charge_mapping, plan_charge_mappingId>;
+  hasPlan_charge_mapping!: Sequelize.HasManyHasAssociationMixin<plan_charge_mapping, plan_charge_mappingId>;
+  hasPlan_charge_mappings!: Sequelize.HasManyHasAssociationsMixin<plan_charge_mapping, plan_charge_mappingId>;
+  countPlan_charge_mappings!: Sequelize.HasManyCountAssociationsMixin;
+  // charge hasMany plan via chargesId
   plans!: plan[];
   getPlans!: Sequelize.HasManyGetAssociationsMixin<plan>;
   setPlans!: Sequelize.HasManySetAssociationsMixin<plan, planId>;

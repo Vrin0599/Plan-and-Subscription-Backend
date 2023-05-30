@@ -56,7 +56,7 @@ export class feature_group extends Model<feature_groupAttributes, feature_groupC
   hasFeature_group_maping!: Sequelize.HasManyHasAssociationMixin<feature_group_maping, feature_group_mapingId>;
   hasFeature_group_mapings!: Sequelize.HasManyHasAssociationsMixin<feature_group_maping, feature_group_mapingId>;
   countFeature_group_mapings!: Sequelize.HasManyCountAssociationsMixin;
-  // feature_group hasMany plan via feature_group_id
+  // feature_group hasMany plan via feature_groupId
   plans!: plan[];
   getPlans!: Sequelize.HasManyGetAssociationsMixin<plan>;
   setPlans!: Sequelize.HasManySetAssociationsMixin<plan, planId>;
