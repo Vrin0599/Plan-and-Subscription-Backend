@@ -70,14 +70,10 @@ export function initModels(sequelize: Sequelize) {
 
   plan_add_on_mapping.belongsTo(add_on, { foreignKey: "add_on_id"});
   add_on.hasMany(plan_add_on_mapping, { foreignKey: "add_on_id"});
-  plan.belongsTo(add_on, { foreignKey: "add_onId"});
-  add_on.hasMany(plan, { foreignKey: "add_onId"});
   company.belongsTo(address, { foreignKey: "address_id"});
   address.hasMany(company, { foreignKey: "address_id"});
   plan_charge_mapping.belongsTo(charge, { foreignKey: "charge_id"});
   charge.hasMany(plan_charge_mapping, { foreignKey: "charge_id"});
-  plan.belongsTo(charge, { foreignKey: "chargesId"});
-  charge.hasMany(plan, { foreignKey: "chargesId"});
   add_on.belongsTo(feature, { foreignKey: "feature_id"});
   feature.hasMany(add_on, { foreignKey: "feature_id"});
   feature_group_maping.belongsTo(feature, { foreignKey: "feature_id"});
@@ -86,8 +82,6 @@ export function initModels(sequelize: Sequelize) {
   feature_group.hasMany(add_on, { foreignKey: "feature_group_id"});
   feature_group_maping.belongsTo(feature_group, { foreignKey: "feature_group_id"});
   feature_group.hasMany(feature_group_maping, { foreignKey: "feature_group_id"});
-  plan.belongsTo(feature_group, { foreignKey: "feature_groupId"});
-  feature_group.hasMany(plan, { foreignKey: "feature_groupId"});
   plan_add_on_mapping.belongsTo(plan, { foreignKey: "plan_id"});
   plan.hasMany(plan_add_on_mapping, { foreignKey: "plan_id"});
   plan_charge_mapping.belongsTo(plan, { foreignKey: "plan_id"});

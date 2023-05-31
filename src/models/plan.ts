@@ -1,8 +1,5 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
-import type { add_on, add_onId } from './add_on';
-import type { charge, chargeId } from './charge';
-import type { feature_group, feature_groupId } from './feature_group';
 import type { plan_add_on_mapping, plan_add_on_mappingId } from './plan_add_on_mapping';
 import type { plan_charge_mapping, plan_charge_mappingId } from './plan_charge_mapping';
 
@@ -17,11 +14,8 @@ export interface planAttributes {
   updated_at?: Date;
   created_by?: string;
   updated_by?: string;
-  add_onId?: string;
   billing_cycles: string;
   billing_period?: string[];
-  chargesId?: string;
-  feature_groupId?: string;
   is_flat_fee?: boolean;
   is_per_user?: boolean;
   is_plan_public?: boolean;
@@ -31,7 +25,7 @@ export interface planAttributes {
 
 export type planPk = "id";
 export type planId = plan[planPk];
-export type planOptionalAttributes = "id" | "description" | "is_recomended" | "is_metered_billing" | "is_active" | "created_at" | "updated_at" | "created_by" | "updated_by" | "add_onId" | "billing_period" | "chargesId" | "feature_groupId" | "is_flat_fee" | "is_per_user" | "is_plan_public" | "is_deleted";
+export type planOptionalAttributes = "id" | "description" | "is_recomended" | "is_metered_billing" | "is_active" | "created_at" | "updated_at" | "created_by" | "updated_by" | "billing_period" | "is_flat_fee" | "is_per_user" | "is_plan_public" | "is_deleted";
 export type planCreationAttributes = Optional<planAttributes, planOptionalAttributes>;
 
 export class plan extends Model<planAttributes, planCreationAttributes> implements planAttributes {
@@ -45,32 +39,14 @@ export class plan extends Model<planAttributes, planCreationAttributes> implemen
   updated_at?: Date;
   created_by?: string;
   updated_by?: string;
-  add_onId?: string;
   billing_cycles!: string;
   billing_period?: string[];
-  chargesId?: string;
-  feature_groupId?: string;
   is_flat_fee?: boolean;
   is_per_user?: boolean;
   is_plan_public?: boolean;
   price!: object;
   is_deleted?: boolean;
 
-  // plan belongsTo add_on via add_onId
-  add_on!: add_on;
-  getAdd_on!: Sequelize.BelongsToGetAssociationMixin<add_on>;
-  setAdd_on!: Sequelize.BelongsToSetAssociationMixin<add_on, add_onId>;
-  createAdd_on!: Sequelize.BelongsToCreateAssociationMixin<add_on>;
-  // plan belongsTo charge via chargesId
-  charge!: charge;
-  getCharge!: Sequelize.BelongsToGetAssociationMixin<charge>;
-  setCharge!: Sequelize.BelongsToSetAssociationMixin<charge, chargeId>;
-  createCharge!: Sequelize.BelongsToCreateAssociationMixin<charge>;
-  // plan belongsTo feature_group via feature_groupId
-  feature_group!: feature_group;
-  getFeature_group!: Sequelize.BelongsToGetAssociationMixin<feature_group>;
-  setFeature_group!: Sequelize.BelongsToSetAssociationMixin<feature_group, feature_groupId>;
-  createFeature_group!: Sequelize.BelongsToCreateAssociationMixin<feature_group>;
   // plan hasMany plan_add_on_mapping via plan_id
   plan_add_on_mappings!: plan_add_on_mapping[];
   getPlan_add_on_mappings!: Sequelize.HasManyGetAssociationsMixin<plan_add_on_mapping>;
@@ -145,14 +121,6 @@ export class plan extends Model<planAttributes, planCreationAttributes> implemen
       type: DataTypes.UUID,
       allowNull: true
     },
-    add_onId: {
-      type: DataTypes.UUID,
-      allowNull: true,
-      references: {
-        model: 'add_on',
-        key: 'id'
-      }
-    },
     billing_cycles: {
       type: DataTypes.STRING,
       allowNull: false
@@ -160,22 +128,6 @@ export class plan extends Model<planAttributes, planCreationAttributes> implemen
     billing_period: {
       type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: true
-    },
-    chargesId: {
-      type: DataTypes.UUID,
-      allowNull: true,
-      references: {
-        model: 'charges',
-        key: 'id'
-      }
-    },
-    feature_groupId: {
-      type: DataTypes.UUID,
-      allowNull: true,
-      references: {
-        model: 'feature_group',
-        key: 'id'
-      }
     },
     is_flat_fee: {
       type: DataTypes.BOOLEAN,

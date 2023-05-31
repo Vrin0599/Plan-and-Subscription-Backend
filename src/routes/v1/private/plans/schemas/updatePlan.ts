@@ -1,4 +1,4 @@
-const updatePlansBody: object = {
+const updatePlanBody: object = {
   type: "object",
   required: ["plan_id"],
   properties: {
@@ -6,7 +6,7 @@ const updatePlansBody: object = {
   },
 };
 
-export const updatePlansSchema: object = {
+export const updatePlanSchema: object = {
   tags: ["Plans"],
   description: "To update plans",
   headers: {
@@ -16,5 +16,5 @@ export const updatePlansSchema: object = {
       authorization: { type: "string" },
     },
   },
-  body: updatePlansBody,
+  body: updatePlanBody,
 };

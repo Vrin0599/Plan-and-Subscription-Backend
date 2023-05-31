@@ -10,7 +10,7 @@ import {
 const plans: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
   fastify.post(
     "/create",
-    { schema: Schema.createPlansSchema },
+    { schema: Schema.createPlanSchema },
     async (req: any, reply) => {
       try {
         const response = await createPlansController(
@@ -26,7 +26,7 @@ const plans: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
 
   fastify.post(
     "/",
-    { schema: Schema.getPlansSchema },
+    { schema: Schema.getPlanSchema },
     async (req: any, reply) => {
       try {
         const response = await getPlansController(
@@ -42,7 +42,7 @@ const plans: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
 
   fastify.put(
     "/",
-    { schema: Schema.updatePlansSchema },
+    { schema: Schema.updatePlanSchema },
     async (req: any, reply) => {
       try {
         const response = await updatePlansController(req.body);
@@ -55,7 +55,7 @@ const plans: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
 
   fastify.delete(
     "/",
-    { schema: Schema.updatePlansSchema },
+    { schema: Schema.updatePlanSchema },
     async (req: any, reply) => {
       try {
         const response = await deletePlansController(req.body);

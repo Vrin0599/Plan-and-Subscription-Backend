@@ -1,6 +1,6 @@
-const createPlansBody: object = {
+const createPlanBody: object = {
   type: "object",
-  required: ["name", "pricing", "feature_group_id", "add_on_id", "charge_id"],
+  required: ["name", "billing_period"],
   properties: {
     name: {
       type: "string",
@@ -8,22 +8,29 @@ const createPlansBody: object = {
     description: {
       type: "string",
     },
-    pricing: {
-      type: "string",
+    price: {
+      type: "object",
+      nullable: false,
     },
-    feature_group_id: {
-      type: "string",
-    },
-    add_on_id: {
-      type: "string",
-    },
-    charge_id: {
-      type: "string",
+    is_plan_public: {
+      type: "boolean",
     },
     is_recomended: {
       type: "boolean",
     },
     is_metered_billing: {
+      type: "boolean",
+    },
+    billing_period: {
+      type: "string",
+    },
+    billing_cycles: {
+      type: "string",
+    },
+    is_flat_fee: {
+      type: "boolean",
+    },
+    is_per_user: {
       type: "boolean",
     },
     is_active: {
@@ -32,7 +39,7 @@ const createPlansBody: object = {
   },
 };
 
-export const createPlansSchema: object = {
+export const createPlanSchema: object = {
   tags: ["Plans"],
   description: "To create a plan",
   headers: {
@@ -44,5 +51,5 @@ export const createPlansSchema: object = {
       },
     },
   },
-  body: createPlansBody,
+  body: createPlanBody,
 };

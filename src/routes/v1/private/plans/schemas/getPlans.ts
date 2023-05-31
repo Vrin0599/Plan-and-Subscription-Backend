@@ -1,4 +1,4 @@
-const getPlansBody: object = {
+const getPlanBody: object = {
   type: "object",
   properties: {
     offset: {
@@ -10,7 +10,7 @@ const getPlansBody: object = {
   },
 };
 
-export const getPlansSchema: object = {
+export const getPlanSchema: object = {
   tags: ["Plans"],
   description: "To get all the Plans",
   headers: {
@@ -20,7 +20,7 @@ export const getPlansSchema: object = {
       authorization: { type: "string" },
     },
   },
-  body: getPlansBody,
+  body: getPlanBody,
   response: {
     200: {
       type: "object",

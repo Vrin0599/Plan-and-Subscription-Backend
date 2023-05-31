@@ -1,7 +1,6 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 import type { plan_charge_mapping, plan_charge_mappingId } from './plan_charge_mapping';
-import type { plan, planId } from './plan';
 
 export interface chargeAttributes {
   id: string;
@@ -43,18 +42,6 @@ export class charge extends Model<chargeAttributes, chargeCreationAttributes> im
   hasPlan_charge_mapping!: Sequelize.HasManyHasAssociationMixin<plan_charge_mapping, plan_charge_mappingId>;
   hasPlan_charge_mappings!: Sequelize.HasManyHasAssociationsMixin<plan_charge_mapping, plan_charge_mappingId>;
   countPlan_charge_mappings!: Sequelize.HasManyCountAssociationsMixin;
-  // charge hasMany plan via chargesId
-  plans!: plan[];
-  getPlans!: Sequelize.HasManyGetAssociationsMixin<plan>;
-  setPlans!: Sequelize.HasManySetAssociationsMixin<plan, planId>;
-  addPlan!: Sequelize.HasManyAddAssociationMixin<plan, planId>;
-  addPlans!: Sequelize.HasManyAddAssociationsMixin<plan, planId>;
-  createPlan!: Sequelize.HasManyCreateAssociationMixin<plan>;
-  removePlan!: Sequelize.HasManyRemoveAssociationMixin<plan, planId>;
-  removePlans!: Sequelize.HasManyRemoveAssociationsMixin<plan, planId>;
-  hasPlan!: Sequelize.HasManyHasAssociationMixin<plan, planId>;
-  hasPlans!: Sequelize.HasManyHasAssociationsMixin<plan, planId>;
-  countPlans!: Sequelize.HasManyCountAssociationsMixin;
 
   static initModel(sequelize: Sequelize.Sequelize): typeof charge {
     return charge.init({

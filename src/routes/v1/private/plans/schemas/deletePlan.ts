@@ -1,4 +1,4 @@
-const deletePlansBody: object = {
+const deletePlanBody: object = {
   type: "object",
   required: ["plans_id"],
   properties: {
@@ -6,7 +6,7 @@ const deletePlansBody: object = {
   },
 };
 
-export const deletePlansSchema: object = {
+export const deletePlanSchema: object = {
   tags: ["Plans"],
   description: "To delete Plans schema",
   headers: {
@@ -15,5 +15,5 @@ export const deletePlansSchema: object = {
       authorization: { type: "string" },
     },
   },
-  body: deletePlansBody,
+  body: deletePlanBody,
 };
