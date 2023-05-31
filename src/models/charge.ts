@@ -7,29 +7,29 @@ export interface chargeAttributes {
   id: string;
   name: string;
   description?: string;
-  delete?: boolean;
   is_active?: boolean;
   created_at?: Date;
   updated_at?: Date;
   created_by?: string;
   updated_by?: string;
+  is_deleted?: boolean;
 }
 
 export type chargePk = "id";
 export type chargeId = charge[chargePk];
-export type chargeOptionalAttributes = "id" | "description" | "delete" | "is_active" | "created_at" | "updated_at" | "created_by" | "updated_by";
+export type chargeOptionalAttributes = "id" | "description" | "is_active" | "created_at" | "updated_at" | "created_by" | "updated_by" | "is_deleted";
 export type chargeCreationAttributes = Optional<chargeAttributes, chargeOptionalAttributes>;
 
 export class charge extends Model<chargeAttributes, chargeCreationAttributes> implements chargeAttributes {
   id!: string;
   name!: string;
   description?: string;
-  delete?: boolean;
   is_active?: boolean;
   created_at?: Date;
   updated_at?: Date;
   created_by?: string;
   updated_by?: string;
+  is_deleted?: boolean;
 
   // charge hasMany plan_charge_mapping via charge_id
   plan_charge_mappings!: plan_charge_mapping[];
@@ -72,11 +72,6 @@ export class charge extends Model<chargeAttributes, chargeCreationAttributes> im
       type: DataTypes.STRING,
       allowNull: true
     },
-    delete: {
-      type: DataTypes.BOOLEAN,
-      allowNull: true,
-      defaultValue: false
-    },
     is_active: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
@@ -99,6 +94,11 @@ export class charge extends Model<chargeAttributes, chargeCreationAttributes> im
     updated_by: {
       type: DataTypes.UUID,
       allowNull: true
+    },
+    is_deleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: false
     }
   }, {
     sequelize,

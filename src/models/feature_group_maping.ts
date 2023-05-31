@@ -7,29 +7,29 @@ export interface feature_group_mapingAttributes {
   id: string;
   feature_group_id: string;
   feature_id: string;
-  delete?: boolean;
   is_active?: boolean;
   created_at?: Date;
   updated_at?: Date;
   created_by?: string;
   updated_by?: string;
+  is_deleted?: boolean;
 }
 
 export type feature_group_mapingPk = "id";
 export type feature_group_mapingId = feature_group_maping[feature_group_mapingPk];
-export type feature_group_mapingOptionalAttributes = "id" | "delete" | "is_active" | "created_at" | "updated_at" | "created_by" | "updated_by";
+export type feature_group_mapingOptionalAttributes = "id" | "is_active" | "created_at" | "updated_at" | "created_by" | "updated_by" | "is_deleted";
 export type feature_group_mapingCreationAttributes = Optional<feature_group_mapingAttributes, feature_group_mapingOptionalAttributes>;
 
 export class feature_group_maping extends Model<feature_group_mapingAttributes, feature_group_mapingCreationAttributes> implements feature_group_mapingAttributes {
   id!: string;
   feature_group_id!: string;
   feature_id!: string;
-  delete?: boolean;
   is_active?: boolean;
   created_at?: Date;
   updated_at?: Date;
   created_by?: string;
   updated_by?: string;
+  is_deleted?: boolean;
 
   // feature_group_maping belongsTo feature via feature_id
   feature!: feature;
@@ -66,11 +66,6 @@ export class feature_group_maping extends Model<feature_group_mapingAttributes, 
         key: 'id'
       }
     },
-    delete: {
-      type: DataTypes.BOOLEAN,
-      allowNull: true,
-      defaultValue: false
-    },
     is_active: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
@@ -93,6 +88,11 @@ export class feature_group_maping extends Model<feature_group_mapingAttributes, 
     updated_by: {
       type: DataTypes.UUID,
       allowNull: true
+    },
+    is_deleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: false
     }
   }, {
     sequelize,

@@ -6,28 +6,28 @@ import type { feature_group_maping, feature_group_mapingId } from './feature_gro
 export interface featureAttributes {
   id: string;
   name: string;
-  delete?: boolean;
   is_active?: boolean;
   created_at?: Date;
   updated_at?: Date;
   created_by?: string;
   updated_by?: string;
+  is_deleted?: boolean;
 }
 
 export type featurePk = "id";
 export type featureId = feature[featurePk];
-export type featureOptionalAttributes = "id" | "delete" | "is_active" | "created_at" | "updated_at" | "created_by" | "updated_by";
+export type featureOptionalAttributes = "id" | "is_active" | "created_at" | "updated_at" | "created_by" | "updated_by" | "is_deleted";
 export type featureCreationAttributes = Optional<featureAttributes, featureOptionalAttributes>;
 
 export class feature extends Model<featureAttributes, featureCreationAttributes> implements featureAttributes {
   id!: string;
   name!: string;
-  delete?: boolean;
   is_active?: boolean;
   created_at?: Date;
   updated_at?: Date;
   created_by?: string;
   updated_by?: string;
+  is_deleted?: boolean;
 
   // feature hasMany add_on via feature_id
   add_ons!: add_on[];
@@ -66,11 +66,6 @@ export class feature extends Model<featureAttributes, featureCreationAttributes>
       type: DataTypes.STRING,
       allowNull: false
     },
-    delete: {
-      type: DataTypes.BOOLEAN,
-      allowNull: true,
-      defaultValue: false
-    },
     is_active: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
@@ -93,6 +88,11 @@ export class feature extends Model<featureAttributes, featureCreationAttributes>
     updated_by: {
       type: DataTypes.UUID,
       allowNull: true
+    },
+    is_deleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: false
     }
   }, {
     sequelize,

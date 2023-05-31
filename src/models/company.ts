@@ -8,17 +8,17 @@ export interface companyAttributes {
   website?: string;
   logo?: string;
   address_id?: string;
-  delete?: boolean;
   is_active?: boolean;
   created_at?: Date;
   updated_at?: Date;
   created_by?: string;
   updated_by?: string;
+  is_deleted?: boolean;
 }
 
 export type companyPk = "id";
 export type companyId = company[companyPk];
-export type companyOptionalAttributes = "id" | "website" | "logo" | "address_id" | "delete" | "is_active" | "created_at" | "updated_at" | "created_by" | "updated_by";
+export type companyOptionalAttributes = "id" | "website" | "logo" | "address_id" | "is_active" | "created_at" | "updated_at" | "created_by" | "updated_by" | "is_deleted";
 export type companyCreationAttributes = Optional<companyAttributes, companyOptionalAttributes>;
 
 export class company extends Model<companyAttributes, companyCreationAttributes> implements companyAttributes {
@@ -27,12 +27,12 @@ export class company extends Model<companyAttributes, companyCreationAttributes>
   website?: string;
   logo?: string;
   address_id?: string;
-  delete?: boolean;
   is_active?: boolean;
   created_at?: Date;
   updated_at?: Date;
   created_by?: string;
   updated_by?: string;
+  is_deleted?: boolean;
 
   // company belongsTo address via address_id
   address!: address;
@@ -68,11 +68,6 @@ export class company extends Model<companyAttributes, companyCreationAttributes>
         key: 'id'
       }
     },
-    delete: {
-      type: DataTypes.BOOLEAN,
-      allowNull: true,
-      defaultValue: false
-    },
     is_active: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
@@ -95,6 +90,11 @@ export class company extends Model<companyAttributes, companyCreationAttributes>
     updated_by: {
       type: DataTypes.UUID,
       allowNull: true
+    },
+    is_deleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: false
     }
   }, {
     sequelize,

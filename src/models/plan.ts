@@ -12,7 +12,6 @@ export interface planAttributes {
   description?: string;
   is_recomended?: boolean;
   is_metered_billing?: boolean;
-  delete?: boolean;
   is_active?: boolean;
   created_at?: Date;
   updated_at?: Date;
@@ -27,11 +26,12 @@ export interface planAttributes {
   is_per_user?: boolean;
   is_plan_public?: boolean;
   price: object;
+  is_deleted?: boolean;
 }
 
 export type planPk = "id";
 export type planId = plan[planPk];
-export type planOptionalAttributes = "id" | "description" | "is_recomended" | "is_metered_billing" | "delete" | "is_active" | "created_at" | "updated_at" | "created_by" | "updated_by" | "add_onId" | "billing_period" | "chargesId" | "feature_groupId" | "is_flat_fee" | "is_per_user" | "is_plan_public";
+export type planOptionalAttributes = "id" | "description" | "is_recomended" | "is_metered_billing" | "is_active" | "created_at" | "updated_at" | "created_by" | "updated_by" | "add_onId" | "billing_period" | "chargesId" | "feature_groupId" | "is_flat_fee" | "is_per_user" | "is_plan_public" | "is_deleted";
 export type planCreationAttributes = Optional<planAttributes, planOptionalAttributes>;
 
 export class plan extends Model<planAttributes, planCreationAttributes> implements planAttributes {
@@ -40,7 +40,6 @@ export class plan extends Model<planAttributes, planCreationAttributes> implemen
   description?: string;
   is_recomended?: boolean;
   is_metered_billing?: boolean;
-  delete?: boolean;
   is_active?: boolean;
   created_at?: Date;
   updated_at?: Date;
@@ -55,6 +54,7 @@ export class plan extends Model<planAttributes, planCreationAttributes> implemen
   is_per_user?: boolean;
   is_plan_public?: boolean;
   price!: object;
+  is_deleted?: boolean;
 
   // plan belongsTo add_on via add_onId
   add_on!: add_on;
@@ -118,11 +118,6 @@ export class plan extends Model<planAttributes, planCreationAttributes> implemen
       defaultValue: false
     },
     is_metered_billing: {
-      type: DataTypes.BOOLEAN,
-      allowNull: true,
-      defaultValue: false
-    },
-    delete: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
       defaultValue: false
@@ -200,6 +195,11 @@ export class plan extends Model<planAttributes, planCreationAttributes> implemen
     price: {
       type: DataTypes.JSONB,
       allowNull: false
+    },
+    is_deleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: false
     }
   }, {
     sequelize,

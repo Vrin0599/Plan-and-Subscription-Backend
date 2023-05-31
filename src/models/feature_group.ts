@@ -8,29 +8,29 @@ export interface feature_groupAttributes {
   id: string;
   name: string;
   description?: string;
-  delete?: boolean;
   is_active?: boolean;
   created_at?: Date;
   updated_at?: Date;
   created_by?: string;
   updated_by?: string;
+  is_deleted?: boolean;
 }
 
 export type feature_groupPk = "id";
 export type feature_groupId = feature_group[feature_groupPk];
-export type feature_groupOptionalAttributes = "id" | "description" | "delete" | "is_active" | "created_at" | "updated_at" | "created_by" | "updated_by";
+export type feature_groupOptionalAttributes = "id" | "description" | "is_active" | "created_at" | "updated_at" | "created_by" | "updated_by" | "is_deleted";
 export type feature_groupCreationAttributes = Optional<feature_groupAttributes, feature_groupOptionalAttributes>;
 
 export class feature_group extends Model<feature_groupAttributes, feature_groupCreationAttributes> implements feature_groupAttributes {
   id!: string;
   name!: string;
   description?: string;
-  delete?: boolean;
   is_active?: boolean;
   created_at?: Date;
   updated_at?: Date;
   created_by?: string;
   updated_by?: string;
+  is_deleted?: boolean;
 
   // feature_group hasMany add_on via feature_group_id
   add_ons!: add_on[];
@@ -85,11 +85,6 @@ export class feature_group extends Model<feature_groupAttributes, feature_groupC
       type: DataTypes.STRING,
       allowNull: true
     },
-    delete: {
-      type: DataTypes.BOOLEAN,
-      allowNull: true,
-      defaultValue: false
-    },
     is_active: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
@@ -112,6 +107,11 @@ export class feature_group extends Model<feature_groupAttributes, feature_groupC
     updated_by: {
       type: DataTypes.UUID,
       allowNull: true
+    },
+    is_deleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: false
     }
   }, {
     sequelize,

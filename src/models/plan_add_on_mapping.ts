@@ -9,17 +9,17 @@ export interface plan_add_on_mappingAttributes {
   limit_count?: number;
   add_on_id: string;
   plan_id: string;
-  delete?: boolean;
   is_active?: boolean;
   created_at?: Date;
   updated_at?: Date;
   created_by?: string;
   updated_by?: string;
+  is_deleted?: boolean;
 }
 
 export type plan_add_on_mappingPk = "id";
 export type plan_add_on_mappingId = plan_add_on_mapping[plan_add_on_mappingPk];
-export type plan_add_on_mappingOptionalAttributes = "id" | "limit_count" | "delete" | "is_active" | "created_at" | "updated_at" | "created_by" | "updated_by";
+export type plan_add_on_mappingOptionalAttributes = "id" | "limit_count" | "is_active" | "created_at" | "updated_at" | "created_by" | "updated_by" | "is_deleted";
 export type plan_add_on_mappingCreationAttributes = Optional<plan_add_on_mappingAttributes, plan_add_on_mappingOptionalAttributes>;
 
 export class plan_add_on_mapping extends Model<plan_add_on_mappingAttributes, plan_add_on_mappingCreationAttributes> implements plan_add_on_mappingAttributes {
@@ -28,12 +28,12 @@ export class plan_add_on_mapping extends Model<plan_add_on_mappingAttributes, pl
   limit_count?: number;
   add_on_id!: string;
   plan_id!: string;
-  delete?: boolean;
   is_active?: boolean;
   created_at?: Date;
   updated_at?: Date;
   created_by?: string;
   updated_by?: string;
+  is_deleted?: boolean;
 
   // plan_add_on_mapping belongsTo add_on via add_on_id
   add_on!: add_on;
@@ -78,11 +78,6 @@ export class plan_add_on_mapping extends Model<plan_add_on_mappingAttributes, pl
         key: 'id'
       }
     },
-    delete: {
-      type: DataTypes.BOOLEAN,
-      allowNull: true,
-      defaultValue: false
-    },
     is_active: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
@@ -105,6 +100,11 @@ export class plan_add_on_mapping extends Model<plan_add_on_mappingAttributes, pl
     updated_by: {
       type: DataTypes.UUID,
       allowNull: true
+    },
+    is_deleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: false
     }
   }, {
     sequelize,

@@ -11,17 +11,17 @@ export interface add_onAttributes {
   description?: string;
   feature_group_id: string;
   feature_id: string;
-  delete?: boolean;
   is_active?: boolean;
   created_at?: Date;
   updated_at?: Date;
   created_by?: string;
   updated_by?: string;
+  is_deleted?: boolean;
 }
 
 export type add_onPk = "id";
 export type add_onId = add_on[add_onPk];
-export type add_onOptionalAttributes = "id" | "description" | "delete" | "is_active" | "created_at" | "updated_at" | "created_by" | "updated_by";
+export type add_onOptionalAttributes = "id" | "description" | "is_active" | "created_at" | "updated_at" | "created_by" | "updated_by" | "is_deleted";
 export type add_onCreationAttributes = Optional<add_onAttributes, add_onOptionalAttributes>;
 
 export class add_on extends Model<add_onAttributes, add_onCreationAttributes> implements add_onAttributes {
@@ -30,12 +30,12 @@ export class add_on extends Model<add_onAttributes, add_onCreationAttributes> im
   description?: string;
   feature_group_id!: string;
   feature_id!: string;
-  delete?: boolean;
   is_active?: boolean;
   created_at?: Date;
   updated_at?: Date;
   created_by?: string;
   updated_by?: string;
+  is_deleted?: boolean;
 
   // add_on hasMany plan_add_on_mapping via add_on_id
   plan_add_on_mappings!: plan_add_on_mapping[];
@@ -104,11 +104,6 @@ export class add_on extends Model<add_onAttributes, add_onCreationAttributes> im
         key: 'id'
       }
     },
-    delete: {
-      type: DataTypes.BOOLEAN,
-      allowNull: true,
-      defaultValue: false
-    },
     is_active: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
@@ -131,6 +126,11 @@ export class add_on extends Model<add_onAttributes, add_onCreationAttributes> im
     updated_by: {
       type: DataTypes.UUID,
       allowNull: true
+    },
+    is_deleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: false
     }
   }, {
     sequelize,

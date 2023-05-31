@@ -9,17 +9,17 @@ export interface addressAttributes {
   state: string;
   country: string;
   pincode: number;
-  delete?: boolean;
   is_active?: boolean;
   created_at?: Date;
   updated_at?: Date;
   created_by?: string;
   updated_by?: string;
+  is_deleted?: boolean;
 }
 
 export type addressPk = "id";
 export type addressId = address[addressPk];
-export type addressOptionalAttributes = "id" | "address_line" | "delete" | "is_active" | "created_at" | "updated_at" | "created_by" | "updated_by";
+export type addressOptionalAttributes = "id" | "address_line" | "is_active" | "created_at" | "updated_at" | "created_by" | "updated_by" | "is_deleted";
 export type addressCreationAttributes = Optional<addressAttributes, addressOptionalAttributes>;
 
 export class address extends Model<addressAttributes, addressCreationAttributes> implements addressAttributes {
@@ -29,12 +29,12 @@ export class address extends Model<addressAttributes, addressCreationAttributes>
   state!: string;
   country!: string;
   pincode!: number;
-  delete?: boolean;
   is_active?: boolean;
   created_at?: Date;
   updated_at?: Date;
   created_by?: string;
   updated_by?: string;
+  is_deleted?: boolean;
 
   // address hasMany company via address_id
   companies!: company[];
@@ -77,11 +77,6 @@ export class address extends Model<addressAttributes, addressCreationAttributes>
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    delete: {
-      type: DataTypes.BOOLEAN,
-      allowNull: true,
-      defaultValue: false
-    },
     is_active: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
@@ -104,6 +99,11 @@ export class address extends Model<addressAttributes, addressCreationAttributes>
     updated_by: {
       type: DataTypes.UUID,
       allowNull: true
+    },
+    is_deleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: false
     }
   }, {
     sequelize,
