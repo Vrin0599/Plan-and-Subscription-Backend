@@ -1,16 +1,12 @@
 const createPlanBody: object = {
   type: "object",
-  required: ["name", "billing_period"],
+  required: ["name", "billing_period", "price", "billing_cycles"],
   properties: {
     name: {
       type: "string",
     },
     description: {
       type: "string",
-    },
-    price: {
-      type: "object",
-      nullable: false,
     },
     is_plan_public: {
       type: "boolean",
@@ -21,20 +17,73 @@ const createPlanBody: object = {
     is_metered_billing: {
       type: "boolean",
     },
-    billing_period: {
-      type: "string",
-    },
-    billing_cycles: {
-      type: "string",
-    },
-    is_flat_fee: {
+    is_active: {
       type: "boolean",
+    },
+    billing_period: {
+      type: "array",
+      items: {
+        type: "string",
+      },
+    },
+    price: {
+      type: "object",
+      properties: {
+        monthly: {
+          type: "number",
+        },
+        yearly: {
+          type: "number",
+        },
+      },
     },
     is_per_user: {
       type: "boolean",
     },
-    is_active: {
+    is_flat_fee: {
       type: "boolean",
+    },
+    billing_cycles: {
+      type: "string",
+    },
+    add_on: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          id: {
+            type: "string",
+          },
+          price: {
+            type: "object",
+            properties: {
+              monthly: {
+                type: "number",
+              },
+              yearly: {
+                type: "number",
+              },
+            },
+          },
+          limit_count: {
+            type: "number",
+          },
+        },
+      },
+    },
+    charge: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          id: {
+            type: "string",
+          },
+          price: {
+            type: "number",
+          },
+        },
+      },
     },
   },
 };

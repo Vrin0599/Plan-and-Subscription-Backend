@@ -1,9 +1,10 @@
 import { Op } from "sequelize";
 import { ResponseType, UserDetails } from "../../utils";
 import { plan } from "../../models/plan";
+import { plan_add_on_mapping } from "../../models/plan_add_on_mapping";
+import { plan_charge_mapping } from "../../models/plan_charge_mapping";
 import { add_on } from "../../models/add_on";
 import { charge } from "../../models/charge";
-import { feature_group } from "../../models/feature_group";
 
 interface GetPlansPayload {
   offset?: number;
@@ -26,19 +27,28 @@ export const getPlansController = (
         limit,
         include: [
           {
-            model: feature_group,
-            as: "feature_group",
-            attributes: ["id"],
+            attributes: ["id", "price", "limit_count"],
+            as: "plan_add_on_mappings",
+            model: plan_add_on_mapping,
+            include: [
+              {
+                attributes: ["id", "name"],
+                as: "add_on",
+                model: add_on,
+              },
+            ],
           },
           {
-            model: add_on,
-            as: "add_on",
-            attributes: ["id"],
-          },
-          {
-            model: charge,
-            as: "charge",
-            attributes: ["id"],
+            attributes: ["id", "price"],
+            as: "plan_charge_mappings",
+            model: plan_charge_mapping,
+            include: [
+              {
+                attributes: ["id", "name"],
+                as: "charge",
+                model: charge,
+              },
+            ],
           },
         ],
         where: {

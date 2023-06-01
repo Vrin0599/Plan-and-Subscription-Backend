@@ -22,7 +22,103 @@ export const getPlanSchema: object = {
   },
   body: getPlanBody,
   response: {
-    200: {
+    // 200: {
+    //   type: "object",
+    //   properties: {
+    //     status: {
+    //       type: "number",
+    //     },
+    //     api_status: {
+    //       type: "string",
+    //     },
+    //     message: {
+    //       type: "string",
+    //     },
+    //     data: {
+    //       type: "object",
+    //       properties: {
+    //         count: {
+    //           type: "number",
+    //         },
+    //         rows: {
+    //           type: "array",
+    //           items: {
+    //             type: "object",
+    //             properties: {
+    //               id: {
+    //                 type: "string",
+    //               },
+    //               name: {
+    //                 type: "string",
+    //               },
+    //               description: {
+    //                 type: "string",
+    //               },
+    //               is_active: {
+    //                 type: "boolean",
+    //               },
+    //               created_at: {
+    //                 type: "string",
+    //               },
+    //               created_by: {
+    //                 type: "string",
+    //               },
+    //               updated_at: {
+    //                 type: "string",
+    //               },
+    //               updated_by: {
+    //                 type: "string",
+    //               },
+    //               add_on: {
+    //                 type: "object",
+    //                 properties: {
+    //                   id: { type: "string" },
+    //                   plans: {
+    //                     type: "object",
+    //                     properties: {
+    //                       id: { type: "string" },
+    //                       name: { type: "string" },
+    //                       is_active: { type: "boolean" },
+    //                     },
+    //                   },
+    //                 },
+    //               },
+    //               charge: {
+    //                 type: "object",
+    //                 properties: {
+    //                   id: { type: "string" },
+    //                   plans: {
+    //                     type: "object",
+    //                     properties: {
+    //                       id: { type: "string" },
+    //                       name: { type: "string" },
+    //                       is_active: { type: "boolean" },
+    //                     },
+    //                   },
+    //                 },
+    //               },
+    //               feature_group: {
+    //                 type: "object",
+    //                 properties: {
+    //                   id: { type: "string" },
+    //                   plans: {
+    //                     type: "object",
+    //                     properties: {
+    //                       id: { type: "string" },
+    //                       name: { type: "string" },
+    //                       is_active: { type: "boolean" },
+    //                     },
+    //                   },
+    //                 },
+    //               },
+    //             },
+    //           },
+    //         },
+    //       },
+    //     },
+    //   },
+    // },
+    500: {
       type: "object",
       properties: {
         status: {
@@ -34,102 +130,6 @@ export const getPlanSchema: object = {
         message: {
           type: "string",
         },
-        data: {
-          type: "object",
-          properties: {
-            count: {
-              type: "number",
-            },
-            rows: {
-              type: "array",
-              items: {
-                type: "object",
-                properties: {
-                  id: {
-                    type: "string",
-                  },
-                  name: {
-                    type: "string",
-                  },
-                  description: {
-                    type: "string",
-                  },
-                  is_active: {
-                    type: "boolean",
-                  },
-                  created_at: {
-                    type: "string",
-                  },
-                  created_by: {
-                    type: "string",
-                  },
-                  updated_at: {
-                    type: "string",
-                  },
-                  updated_by: {
-                    type: "string",
-                  },
-                  add_on: {
-                    type: "object",
-                    properties: {
-                      id: { type: "string" },
-                      plans: {
-                        type: "object",
-                        properties: {
-                          id: { type: "string" },
-                          name: { type: "string" },
-                          is_active: { type: "boolean" },
-                        },
-                      },
-                    },
-                  },
-                  charge: {
-                    type: "object",
-                    properties: {
-                      id: { type: "string" },
-                      plans: {
-                        type: "object",
-                        properties: {
-                          id: { type: "string" },
-                          name: { type: "string" },
-                          is_active: { type: "boolean" },
-                        },
-                      },
-                    },
-                  },
-                  feature_group: {
-                    type: "object",
-                    properties: {
-                      id: { type: "string" },
-                      plans: {
-                        type: "object",
-                        properties: {
-                          id: { type: "string" },
-                          name: { type: "string" },
-                          is_active: { type: "boolean" },
-                        },
-                      },
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
-      },
-    },
-  },
-  500: {
-    type: "object",
-    properties: {
-      status: {
-        type: "number",
-      },
-      api_status: {
-        type: "string",
-      },
-      message: {
-        type: "string",
       },
     },
   },
