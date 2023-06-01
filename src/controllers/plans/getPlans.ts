@@ -5,6 +5,8 @@ import { plan_add_on_mapping } from "../../models/plan_add_on_mapping";
 import { plan_charge_mapping } from "../../models/plan_charge_mapping";
 import { add_on } from "../../models/add_on";
 import { charge } from "../../models/charge";
+import { plan_feature_maping } from "../../models/plan_feature_maping";
+import { feature } from "../../models/feature";
 
 interface GetPlansPayload {
   offset?: number;
@@ -50,12 +52,25 @@ export const getPlansController = (
               },
             ],
           },
+          {
+            attributes: ["id", "limit_count"],
+            as: "plan_feature_mapings",
+            model: plan_feature_maping,
+            include: [
+              {
+                attributes: ["id", "name"],
+                as: "feature",
+                model: feature,
+              },
+            ],
+          },
         ],
         where: {
           created_by: user.user_profile_id,
           name: {
             [Op.iLike]: `%${search}%`,
           },
+          is_deleted: false,
         },
         distinct: true,
       });

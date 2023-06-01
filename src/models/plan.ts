@@ -2,6 +2,7 @@ import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 import type { plan_add_on_mapping, plan_add_on_mappingId } from './plan_add_on_mapping';
 import type { plan_charge_mapping, plan_charge_mappingId } from './plan_charge_mapping';
+import type { plan_feature_maping, plan_feature_mapingId } from './plan_feature_maping';
 
 export interface planAttributes {
   id: string;
@@ -71,6 +72,18 @@ export class plan extends Model<planAttributes, planCreationAttributes> implemen
   hasPlan_charge_mapping!: Sequelize.HasManyHasAssociationMixin<plan_charge_mapping, plan_charge_mappingId>;
   hasPlan_charge_mappings!: Sequelize.HasManyHasAssociationsMixin<plan_charge_mapping, plan_charge_mappingId>;
   countPlan_charge_mappings!: Sequelize.HasManyCountAssociationsMixin;
+  // plan hasMany plan_feature_maping via plan_id
+  plan_feature_mapings!: plan_feature_maping[];
+  getPlan_feature_mapings!: Sequelize.HasManyGetAssociationsMixin<plan_feature_maping>;
+  setPlan_feature_mapings!: Sequelize.HasManySetAssociationsMixin<plan_feature_maping, plan_feature_mapingId>;
+  addPlan_feature_maping!: Sequelize.HasManyAddAssociationMixin<plan_feature_maping, plan_feature_mapingId>;
+  addPlan_feature_mapings!: Sequelize.HasManyAddAssociationsMixin<plan_feature_maping, plan_feature_mapingId>;
+  createPlan_feature_maping!: Sequelize.HasManyCreateAssociationMixin<plan_feature_maping>;
+  removePlan_feature_maping!: Sequelize.HasManyRemoveAssociationMixin<plan_feature_maping, plan_feature_mapingId>;
+  removePlan_feature_mapings!: Sequelize.HasManyRemoveAssociationsMixin<plan_feature_maping, plan_feature_mapingId>;
+  hasPlan_feature_maping!: Sequelize.HasManyHasAssociationMixin<plan_feature_maping, plan_feature_mapingId>;
+  hasPlan_feature_mapings!: Sequelize.HasManyHasAssociationsMixin<plan_feature_maping, plan_feature_mapingId>;
+  countPlan_feature_mapings!: Sequelize.HasManyCountAssociationsMixin;
 
   static initModel(sequelize: Sequelize.Sequelize): typeof plan {
     return plan.init({

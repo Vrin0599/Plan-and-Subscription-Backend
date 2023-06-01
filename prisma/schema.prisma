@@ -49,6 +49,7 @@ model feature {
   is_deleted           Boolean?               @default(false)
   add_on               add_on[]
   feature_group_maping feature_group_maping[]
+  plan_feature_maping  plan_feature_maping[]
 }
 
 model feature_group {
@@ -63,7 +64,6 @@ model feature_group {
   is_deleted           Boolean?               @default(false)
   add_on               add_on[]
   feature_group_maping feature_group_maping[]
- 
 }
 
 model feature_group_maping {
@@ -95,7 +95,6 @@ model add_on {
   feature_group       feature_group         @relation(fields: [feature_group_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   feature             feature               @relation(fields: [feature_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   plan_add_on_mapping plan_add_on_mapping[]
-
 }
 
 model charges {
@@ -131,6 +130,7 @@ model plans {
   updated_by          String?               @db.Uuid
   plan_add_on_mapping plan_add_on_mapping[]
   plan_charge_mapping plan_charge_mapping[]
+  plan_feature_maping plan_feature_maping[]
 }
 
 model plan_add_on_mapping {
@@ -162,4 +162,19 @@ model plan_charge_mapping {
   is_deleted Boolean?  @default(false)
   charges    charges   @relation(fields: [charge_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   plans      plans     @relation(fields: [plan_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model plan_feature_maping {
+  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  plan_id     String    @db.Uuid
+  feature_id  String    @db.Uuid
+  limit_count Int
+  is_active   Boolean?  @default(true)
+  created_at  DateTime? @default(now()) @db.Timestamp(6)
+  updated_at  DateTime? @default(now()) @db.Timestamp(6)
+  created_by  String?   @db.Uuid
+  updated_by  String?   @db.Uuid
+  is_deleted  Boolean?  @default(false)
+  feature     feature   @relation(fields: [feature_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  plans       plans     @relation(fields: [plan_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }

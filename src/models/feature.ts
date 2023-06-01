@@ -2,6 +2,7 @@ import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 import type { add_on, add_onId } from './add_on';
 import type { feature_group_maping, feature_group_mapingId } from './feature_group_maping';
+import type { plan_feature_maping, plan_feature_mapingId } from './plan_feature_maping';
 
 export interface featureAttributes {
   id: string;
@@ -53,6 +54,18 @@ export class feature extends Model<featureAttributes, featureCreationAttributes>
   hasFeature_group_maping!: Sequelize.HasManyHasAssociationMixin<feature_group_maping, feature_group_mapingId>;
   hasFeature_group_mapings!: Sequelize.HasManyHasAssociationsMixin<feature_group_maping, feature_group_mapingId>;
   countFeature_group_mapings!: Sequelize.HasManyCountAssociationsMixin;
+  // feature hasMany plan_feature_maping via feature_id
+  plan_feature_mapings!: plan_feature_maping[];
+  getPlan_feature_mapings!: Sequelize.HasManyGetAssociationsMixin<plan_feature_maping>;
+  setPlan_feature_mapings!: Sequelize.HasManySetAssociationsMixin<plan_feature_maping, plan_feature_mapingId>;
+  addPlan_feature_maping!: Sequelize.HasManyAddAssociationMixin<plan_feature_maping, plan_feature_mapingId>;
+  addPlan_feature_mapings!: Sequelize.HasManyAddAssociationsMixin<plan_feature_maping, plan_feature_mapingId>;
+  createPlan_feature_maping!: Sequelize.HasManyCreateAssociationMixin<plan_feature_maping>;
+  removePlan_feature_maping!: Sequelize.HasManyRemoveAssociationMixin<plan_feature_maping, plan_feature_mapingId>;
+  removePlan_feature_mapings!: Sequelize.HasManyRemoveAssociationsMixin<plan_feature_maping, plan_feature_mapingId>;
+  hasPlan_feature_maping!: Sequelize.HasManyHasAssociationMixin<plan_feature_maping, plan_feature_mapingId>;
+  hasPlan_feature_mapings!: Sequelize.HasManyHasAssociationsMixin<plan_feature_maping, plan_feature_mapingId>;
+  countPlan_feature_mapings!: Sequelize.HasManyCountAssociationsMixin;
 
   static initModel(sequelize: Sequelize.Sequelize): typeof feature {
     return feature.init({

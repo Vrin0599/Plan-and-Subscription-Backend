@@ -1,6 +1,6 @@
 const createPlanBody: object = {
   type: "object",
-  required: ["name", "billing_period", "price", "billing_cycles"],
+  required: ["name", "billing_period", "price", "billing_cycles", "feature"],
   properties: {
     name: {
       type: "string",
@@ -45,6 +45,20 @@ const createPlanBody: object = {
     },
     billing_cycles: {
       type: "string",
+    },
+    feature: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          id: {
+            type: "string",
+          },
+          limit_count: {
+            type: "string",
+          },
+        },
+      },
     },
     add_on: {
       type: "array",

@@ -1,6 +1,7 @@
 import { plan } from "../../models/plan";
 import { plan_add_on_mapping } from "../../models/plan_add_on_mapping";
 import { plan_charge_mapping } from "../../models/plan_charge_mapping";
+import { plan_feature_maping } from "../../models/plan_feature_maping";
 import { ResponseType, UserDetails } from "../../utils";
 
 interface PricePayloadData {
@@ -19,6 +20,11 @@ interface ChargePayloadData {
   price: PricePayloadData;
 }
 
+interface FeaturePayloadData {
+  id: string;
+  limit_count: number;
+}
+
 interface CreatePlansPayload {
   name: string;
   description: string;
@@ -31,6 +37,7 @@ interface CreatePlansPayload {
   is_per_user?: boolean;
   is_flat_fee?: boolean;
   billing_cycles: string;
+  feature: Array<FeaturePayloadData>;
   add_on?: Array<AddOnPayloadData>;
   charge?: Array<ChargePayloadData>;
 }
@@ -79,6 +86,17 @@ export const createPlansController = async (
           };
         });
         await plan_charge_mapping.bulkCreate(mapping_data_plan_charge);
+
+        const mapping_data_plan_feature: any = payload.feature?.map(
+          (feature) => {
+            return {
+              plan_id: createPlan.id,
+              feature_id: feature.id,
+              limit_count: feature.limit_count,
+            };
+          }
+        );
+        await plan_feature_maping.bulkCreate(mapping_data_plan_feature);
       }
 
       resolve({
